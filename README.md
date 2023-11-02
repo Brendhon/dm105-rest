@@ -8,7 +8,7 @@ Este projeto da disciplina DM105 (Conceituação e projeto de WebServices e inte
 
 Para isso, foi gerado um client em Java com base no Swagger do **[Spotify.yaml](https://github.com/sonallux/spotify-web-api/blob/main/fixed-spotify-open-api.yml)**.
 
-No projeto criado pelo [Editor do Swagger](https://editor.swagger.io/), foi adicionado a seguinte a classe **[AlbumsApiClient.java](src/main/java/io/swagger/client/AlbumsApiClient.java)** para simular o consumo da API do Spotify.
+No projeto criado pelo [Editor do Swagger](https://editor.swagger.io/), foi adicionado a classe **[AlbumsApiClient.java](src/main/java/io/swagger/client/AlbumsApiClient.java)** para simular o consumo da API do Spotify.
 
 ---
 
