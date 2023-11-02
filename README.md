@@ -36,89 +36,36 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/Brendhon/dm106-tasks.git
+$ git clone https://github.com/Brendhon/dm105-rest.git
 
 # Acesse a pasta do projeto
 
-# Limpe o projeto
-$ dotnet clean
-
-# Build da aplicação
-$ dotnet build
+# Limpe o projeto e baixe as dependências
+$ mvn clean install
 
 ```
 
-É necessário também ter uma conta na **[Azure](https://azure.microsoft.com/pt-br/)**, criar um banco de dados SQL, criar uma Web App e criar um arquivo **appsettings.json** na raiz do projeto com a seguinte estrutura:
+É necessário também ter uma conta no **[Spotify](https://developer.spotify.com/dashboard/login)** e criar um projeto para obter o **Client ID** e **Client Secret**.
 
-```json
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "AZURE_SQL_CONNECTION": "<connection-string-do-banco-de-dados>"
-  }
-}
 
-```
-
-### ⚽ Rodando no modo desenvolvedor
-
-É necessário a criação de um arquivo **appsettings.Development.json** na raiz do projeto com a mesma estrutura do arquivo **appsettings.json**.
-
-Após isso, execute o seguinte comando:
+Apos isso, faça uma requisição **POST** para o endpoint **/api/token** para obter o **access_token**.
 
 ```bash
-
-# Execute a aplicação
-$ dotnet run
-
-# Iniciará na porta:500
-
+curl -X POST "https://accounts.spotify.com/api/token" -H "Content-Type: application/x-www-form-urlencoded" -d"grant_type=client_credentials&client_id=CLIENT_ID&client_secret=CLIENT_SECRET"
 ```
 
----
+Onde **CLIENT_ID** e **CLIENT_SECRET** são os valores obtidos no Spotify.
 
-## Comandos úteis
+Com o **access_token** em mãos, atualize o arquivo **[AlbumsApiClient.java](src/main/java/io/swagger/client/AlbumsApiClient.java)** com o valor obtido.
 
-```bash
-
-# Gerando o arquivo de migração
-$ dotnet ef migrations add <nome da migration> --context <nome do contexto>
-
-# Após fazer a migração no comando anterior, vamos agora aplicar essas migrações no banco
-$ dotnet ef database update
-
-# Aplicar as migrações em um banco de dados específico
-$ dotnet ef database update --connection "<your-azure-sql-connection-string>" --context TaskContext
-
-# Para remover uma migração e que inclusive já foi enviada para o banco, use
-$ dotnet ef migrations remove
-$ dotnet ef database update
-
-# Para gerar o script SQL do banco, use o comando
-$ dotnet ef migrations script -o ./script.sql
-
+```java
+String accessToken = "access_token";
 ```
 
----
-
-## Observações
-
-- Foi adicionado um arquivo do Postman na raiz do projeto para testar a API.
-- Lembrando que é necessário habilitar o acesso ao banco de dados do Azure para o IP da sua máquina, caso contrário, não será possível acessar o banco de dados.
-- Após executar a aplicação, acesse a documentação da API em: **[http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)**
-- Lembre-se, sempre que alterar o banco de dados, é necessário criar uma nova migration e atualizar o banco de dados, para isso, utilize os comando acima.
-- Caso use o Visual Studio Code, recomendo que instale as seguintes extensões para facilitar o desenvolvimento:
-  - **[Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)**
-  - **[C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)**
-  - **[Azure Account](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account)**
+O resultado será armazenado no arquivo **[RESULTADO_ALBUNS.json](RESULTADO_ALBUNS.json)**.
 
 ---
+
 
 ## 👥 Autor
 <h4 align="left">

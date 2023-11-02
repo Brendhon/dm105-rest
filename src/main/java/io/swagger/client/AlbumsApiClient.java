@@ -15,7 +15,7 @@ public class AlbumsApiClient {
     OAuth oauth_2_0 = (OAuth) defaultClient.getAuthentication("oauth_2_0");
 
     // In a real app, you would have a more secure way than hardcoding the access token here
-    String accessToken = "BQA95purUjP-JlkeHjoS-8XzyUt6phsIACYrYOoW5G8MvRdEfKH8jFrpF1TnRB4RBW3zISKYbyDSfjaaV6TkI-Cz-enzmYzu81R3X0ynrYCJlVgwIRE";
+    String accessToken = "SEU_ACCESS_TOKEN";
 
     // Set access token
     oauth_2_0.setAccessToken(accessToken);
@@ -38,7 +38,7 @@ public class AlbumsApiClient {
       System.out.println("Resultado gravado em " + result.getAlbums());
 
       // Write JSON string to a file
-      writeToFile("RESULTADO_ALBUNS.txt", result.toString());
+      writeToFile("RESULTADO_ALBUNS.json", result.toString());
     } catch (ApiException e) {
 
       // Handle error
